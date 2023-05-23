@@ -1,7 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+
 import { EventoService } from '../../services/evento.service';
 import { Evento } from '../../models/Evento';
 
@@ -12,6 +14,14 @@ import { Evento } from '../../models/Evento';
   // providers: [EventoService]
 })
 export class EventosComponent implements OnInit {
+
+  constructor(
+    private eventoService: EventoService,
+    private modalService: BsModalService,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
+  ) { }
+
   modalRef: BsModalRef;
   public eventos: Evento[] = [];
   public eventosFiltrados: Evento[] = [];
@@ -38,12 +48,6 @@ export class EventosComponent implements OnInit {
     );
   }
 
-  constructor(
-    private eventoService: EventoService,
-    private modalService: BsModalService,
-    private toastr: ToastrService,
-    private spinner: NgxSpinnerService
-  ) { }
 
   public ngOnInit(): void {
     this.spinner.show();
